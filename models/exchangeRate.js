@@ -1,10 +1,14 @@
-const mongoose = require('mongoose');
+// models/exchangeRate.js
 
-const exchangeRateSchema = new mongoose.Schema({
-    fromCurrency: { type: String, required: true },
-    toCurrency: { type: String, required: true },
-    rate: { type: Number, required: true },
-    date: { type: Date, default: Date.now },
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const exchangeRateSchema = new Schema({
+  seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
+  fromCurrency: { type: String, required: true },
+  toCurrency: { type: String, required: true },
+  rate: { type: Number, required: true },
+  date: { type: Date, required: true }
 });
 
 module.exports = mongoose.model('ExchangeRate', exchangeRateSchema);

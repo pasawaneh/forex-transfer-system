@@ -15,12 +15,17 @@ const exchangeRateRoutes = require('./routes/exchangeRatesRoutes');
 const forexReserveRoutes = require('./routes/forexReservesRoutes');
 const forexPurchaseRoutes = require('./routes/forexPurchasesRoutes');
 const currencyPairRoutes = require('./routes/currencyPairRoutes');
+const sellerRoutes = require('./routes/sellerRoutes');
+
 
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/exchangeRates', exchangeRateRoutes);
 app.use('/api/forexReserves', forexReserveRoutes);
 app.use('/api/forexPurchases', forexPurchaseRoutes);
 app.use('/api/currencyPairs', currencyPairRoutes);
+app.use('/api/sellers', sellerRoutes);
+
+const { ensureReservesForAllCurrencyPairs } = require('./controllers/forexReserveController');
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => app.listen(5000, () => console.log('Server running on port 5000')))
